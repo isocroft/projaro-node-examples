@@ -2,7 +2,13 @@ const fs = require('fs');
 const path = require('path');
 
 fs.writeFile(path.join(__dirname, 'open/hello.txt'), "Hello To Everyone!", function(err){
+  if (err) throw err;
+  console.log('Written!');
+});
 
+fs.appendFile('hello.txt', " This is the beginning...", function (err) {
+  if (err) throw err;
+  console.log('Updated!');
 });
 
 fs.exists(path.join(__dirname, 'open/hello.txt'), (exists) => {
