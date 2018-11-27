@@ -1,18 +1,19 @@
 const fs = require('fs');
 const path = require('path');
+// const { promisify } = require('util')
+
+fs.exists(path.join(__dirname, 'open/hello.txt'), (exists) => {
+  console.log(exists ? 'it\'s there' : 'it\'s not there');
+});
 
 fs.writeFile(path.join(__dirname, 'open/hello.txt'), "Hello To Everyone!", function(err){
   if (err) throw err;
   console.log('Written!');
 });
 
-fs.appendFile('hello.txt', " This is the beginning...", function (err) {
+fs.appendFile('open/hello.txt', " This is the beginning...", function (err) {
   if (err) throw err;
   console.log('Updated!');
-});
-
-fs.exists(path.join(__dirname, 'open/hello.txt'), (exists) => {
-  console.log(exists ? 'it\'s there' : 'it\'s not there');
 });
 
 fs.open(path.join(__dirname, 'open/hello.txt'), 'r', (err, fd) => {
