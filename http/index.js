@@ -11,13 +11,13 @@ let makeServer = function (request, response){
    const port = response.socket.remotePort;
    const httpVersion = request.httpVersion;
    const httpVerb = request.method;
-   const c_ip = request.socket.remoteAddress // clientIp
+   const c_ip = request.headers['x-forwared-for'] || request.connection.remoteAddress || request.socket.remoteAddress // clientIp
    
    request.on('data', (chunk) => {
       console.log(`ENTITY BODY: ${chunk}`);
    });
    
-   requset.on('end', () => {
+   request.on('end', () => {
       console.log('No more data in response.');
    });
    
